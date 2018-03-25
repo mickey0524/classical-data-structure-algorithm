@@ -84,6 +84,19 @@ class TraversalTree(object):
     非递归中序遍历
     type node: TreeNode 树的节点
     """
+    if not node:
+      return
+    
+    stack = deque()
+    while len(stack) != 0 or node:
+      while node:
+        stack.append(node)
+        node = node.left
+      if len(stack) != 0:
+        node = stack.pop()
+        print node.val,
+        node = node.right
+
 
   def recursive_postorder(self, node):
     """
@@ -101,6 +114,21 @@ class TraversalTree(object):
     非递归后序遍历
     type node: TreeNode 树的节点
     """
+    stack = deque()
+    last_visit = None
+    while len(stack) != 0 or node:
+      while node:
+        stack.append(node)
+        node = node.left
+      if len(stack) != 0:
+        node = stack[-1]
+        if not node.right or node.right == last_visit:
+          node = stack.pop()
+          print node.val,
+          last_visit = node
+          node = None
+        else:
+          node = node.right
 
 
   def level_traversal(self, node):
@@ -122,8 +150,6 @@ class TraversalTree(object):
         queue.appendleft(node.right)
 
 
-
-
 if __name__ == '__main__':
   arr = [1, 4, 5, 2, 4, 7, 8, 9, 4, 5, 10]
   tree = TraversalTree(arr)
@@ -134,7 +160,11 @@ if __name__ == '__main__':
   tree.non_recursive_preorder(tree.root)
   print '\n递归中序遍历: ',
   tree.recursive_inorder(tree.root)
+  print '\n非递归中序遍历: ',
+  tree.non_recursive_inorder(tree.root)
   print '\n递归后序遍历: ',
   tree.recursive_postorder(tree.root)
+  print '\n非递归后序遍历: ',
+  tree.non_recursive_postorder(tree.root)
   print '\n层次遍历: ',
   tree.level_traversal(tree.root)
