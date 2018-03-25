@@ -4,6 +4,7 @@
 # 实现树的前序，中序，后序的递归与非递归遍历以及树的层次遍历
 # 2018-03-25
 
+from collections import deque
 
 class TreeNode(object):
 
@@ -13,7 +14,7 @@ class TreeNode(object):
     self.right = None
 
 
-class TraverseTree(object):
+class TraversalTree(object):
 
   def __init__(self, arr):
     self.arr = arr
@@ -36,6 +37,7 @@ class TraverseTree(object):
     else:
       node.right = None
     return node
+    
 
   def recursive_preorder(self, node):
     """
@@ -48,6 +50,24 @@ class TraverseTree(object):
     self.recursive_preorder(node.left)
     self.recursive_preorder(node.right)
 
+  def non_recursive_preorder(self, node):
+    """
+    非递归前序遍历
+    type node: TreeNode 树的节点
+    """
+    stack = deque()
+    if not node:
+      return
+    stack.append(node)
+    while len(stack) != 0:
+      node = stack.pop()
+      print node.val,
+      if node.right:
+        stack.append(node.right)
+      if node.left:
+        stack.append(node.left)
+
+
   def recursive_inorder(self, node):
     """
     递归中序遍历
@@ -59,6 +79,12 @@ class TraverseTree(object):
     print node.val,
     self.recursive_inorder(node.right)
   
+  def non_recursive_inorder(self, node):
+    """
+    非递归中序遍历
+    type node: TreeNode 树的节点
+    """
+
   def recursive_postorder(self, node):
     """
     递归后序遍历
@@ -70,12 +96,27 @@ class TraverseTree(object):
     self.recursive_postorder(node.right)
     print node.val,
 
+  def non_recursive_postorder(self, node):
+    """
+    非递归后序遍历
+    type node: TreeNode 树的节点
+    """
+
+
+  def level_traversal(self, node):
+    """
+    层次遍历
+    type node: TreeNode 树的节点
+    """
+
 
 if __name__ == '__main__':
   arr = [1, 4, 5, 2, 4]
-  tree = TraverseTree(arr)
+  tree = TraversalTree(arr)
 
   tree.recursive_preorder(tree.root)
+  print '\n',
+  tree.non_recursive_preorder(tree.root)
   print '\n',
   tree.recursive_inorder(tree.root)
   print '\n',
