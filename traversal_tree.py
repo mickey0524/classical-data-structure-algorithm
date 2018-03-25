@@ -108,17 +108,33 @@ class TraversalTree(object):
     层次遍历
     type node: TreeNode 树的节点
     """
+    if not node:
+      return
+    
+    queue = deque()
+    queue.append(node)
+    while len(queue) != 0:
+      node = queue.pop()
+      print node.val,
+      if node.left:
+        queue.appendleft(node.left)
+      if node.right:
+        queue.appendleft(node.right)
+
+
 
 
 if __name__ == '__main__':
-  arr = [1, 4, 5, 2, 4]
+  arr = [1, 4, 5, 2, 4, 7, 8, 9, 4, 5, 10]
   tree = TraversalTree(arr)
 
+  print '递归前序遍历: ',
   tree.recursive_preorder(tree.root)
-  print '\n',
+  print '\n非递归前序遍历: ',
   tree.non_recursive_preorder(tree.root)
-  print '\n',
+  print '\n递归中序遍历: ',
   tree.recursive_inorder(tree.root)
-  print '\n',
+  print '\n递归后序遍历: ',
   tree.recursive_postorder(tree.root)
-  print '\n',
+  print '\n层次遍历: ',
+  tree.level_traversal(tree.root)
