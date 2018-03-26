@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# 作者: mickey0524
+# author: mickey0524
 # 实现树的前序，中序，后序的递归与非递归遍历以及树的层次遍历
 # 2018-03-25
 
