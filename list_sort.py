@@ -29,6 +29,48 @@ class ListSort(object):
         arr[j] = tmp
     print arr
     return arr
+  
+  def bubble_sort(self):
+    """
+    冒泡排序
+    rype: list
+    """
+    arr = self.arr
+    length = len(arr)
+    for i in xrange(0, length - 1):
+      for j in xrange(i + 1, length):
+        if arr[j] < arr[i]:
+          arr[i], arr[j] = arr[j], arr[i]
+    print arr
+    return arr
+  
+  def quick_sort(self):
+    """
+    快排
+    rtype: list
+    """
+    pass
+
+  def binary_sort(self):
+    """
+    二分排序
+    rtype: list
+    """
+    pass
+  
+  def heap_sort(self):
+    """
+    堆排序
+    rtype: list
+    """
+    pass
+
+  def merge_sort(self):
+    """
+    归并排序
+    rtype: list
+    """
+    pass
 
 
 if __name__ == '__main__':
@@ -37,3 +79,6 @@ if __name__ == '__main__':
 
   print '普通插入排序: ',
   sort.insert_sort()
+
+  print '冒泡排序: ',
+  sort.bubble_sort()

@@ -156,15 +156,21 @@ if __name__ == '__main__':
 
   print '递归前序遍历: ',
   tree.recursive_preorder(tree.root)
+  
   print '\n非递归前序遍历: ',
   tree.non_recursive_preorder(tree.root)
+
   print '\n递归中序遍历: ',
   tree.recursive_inorder(tree.root)
+
   print '\n非递归中序遍历: ',
   tree.non_recursive_inorder(tree.root)
+
   print '\n递归后序遍历: ',
   tree.recursive_postorder(tree.root)
+
   print '\n非递归后序遍历: ',
   tree.non_recursive_postorder(tree.root)
+  
   print '\n层次遍历: ',
   tree.level_traversal(tree.root)
