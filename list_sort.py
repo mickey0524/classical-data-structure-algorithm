@@ -83,7 +83,6 @@ class ListSort(object):
       self.quick_sort(arr, head, middle - 1)
       self.quick_sort(arr, middle + 1, tail)
     
-
   def binary_sort(self):
     """
     二分排序
@@ -111,8 +110,22 @@ class ListSort(object):
     堆排序
     rtype: list
     """
-    pass
-
+    arr = self.arr
+    length = len(arr)
+    
+    for i in xrange(length - 1):
+      tail = length - 1 - i
+      for j in xrange(tail - 1 / 2, -1, -1):
+        left, right = 2 * j + 1, 2 * j + 2
+        if left <= tail and arr[left] > arr[j]:
+          arr[left], arr[j] = arr[j], arr[left]
+        if right <= tail and arr[right] > arr[j]:
+          arr[right], arr[j] = arr[j], arr[right]
+      arr[tail], arr[0] = arr[0], arr[tail]
+    
+    print arr
+    return arr
+    
   def merge_sort(self, arr, head, tail):
     """
     归并排序
@@ -155,10 +168,16 @@ if __name__ == '__main__':
   sort.quick_sort(quick_sort_arr, 0, len(quick_sort_arr) - 1)
   print quick_sort_arr
 
+  print '二分排序: ',
+  sort.binary_sort()
+
+  print '堆排序: ',
+  sort.heap_sort()
+  
   print '归并排序: ',
   merge_sort_arr = sort.arr
   sort.merge_sort(merge_sort_arr, 0, len(merge_sort_arr) - 1)
   print merge_sort_arr
 
-  print '二分排序: ',
-  sort.binary_sort()
+
+
