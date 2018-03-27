@@ -4,6 +4,8 @@
 # 实现插入(insert)，冒泡(bubble)，快速(quick)，二分(binary)，堆(heap)，归并(merge)的排序
 # 2018-03-26
 
+import heapq, bisect
+
 class ListSort(object):
 
   def __init__(self, arr):
@@ -104,6 +106,21 @@ class ListSort(object):
       arr[head] = tmp
     print arr
     return arr
+  
+  def api_binary_sort(self):
+    """
+    用python提供的api实现二分排序
+    rtype: list
+    """
+    arr = self.arr
+    length = len(arr)
+    res = []
+
+    for i in xrange(length):
+      bisect.insort(res, arr[i])
+    
+    print res
+    return res
 
   def heap_sort(self):
     """
@@ -125,6 +142,19 @@ class ListSort(object):
     
     print arr
     return arr
+  
+  def api_heap_sort(self):
+    """
+    用python提供的api实现堆排序
+    rtype: list
+    """
+    arr = self.arr
+    length = len(arr)
+    heap = []
+
+    for i in xrange(length):
+      heapq.heappush(heap, arr[i])
+    return [heapq.heappop(heap) for _ in xrange(length)]
     
   def merge_sort(self, arr, head, tail):
     """
@@ -171,8 +201,13 @@ if __name__ == '__main__':
   print '二分排序: ',
   sort.binary_sort()
 
+  print 'api二分排序: ',
+  sort.api_binary_sort()
+
   print '堆排序: ',
   sort.heap_sort()
+
+  print 'api堆排序: {arr}'.format(arr = sort.api_heap_sort())
   
   print '归并排序: ',
   merge_sort_arr = sort.arr

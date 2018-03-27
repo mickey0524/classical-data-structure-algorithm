@@ -4,4 +4,4 @@ classical data structure algorithm implemented by python such as traverse treeï¼
 # Todo
   - [x] traverse tree (include recursive and nonrecursive)
   - [x] sort (insert sort, bubble sort, quick sort, binary sort, heap sort, merge sort)
-  - [ ] api sort (sort by calling api provided by python)
+  - [x] api sort (sort by calling api provided by python)
