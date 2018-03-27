@@ -113,13 +113,32 @@ class ListSort(object):
     """
     pass
 
-  def merge_sort(self):
+  def merge_sort(self, arr, head, tail):
     """
     归并排序
+    type head: int 起始索引
+    type tail: int 终止索引
     rtype: list
     """
-    pass
-
+    middle = head + (tail - head) / 2
+    if middle != head and middle != tail:
+      return self.merge_sort(arr, head, middle) + self.merge_sort(arr, middle + 1, tail)
+    l_head, l_tail = head, middle
+    r_head, r_tail = middle + 1, tail
+    extra_arr = []
+    while l_head <= l_tail and r_head <= r_tail:
+      if arr[l_head] <= arr[r_head]:
+        extra_arr += arr[l_head],
+        l_head += 1
+      else:
+        extra_arr += arr[r_head],
+        r_head += 1
+    if l_head <= l_tail:
+      extra_arr += arr[l_head:l_tail + 1]
+    else:
+      extra_arr += arr[r_head:r_tail + 1]
+    return extra_arr
+    
 
 if __name__ == '__main__':
   arr = [1, 4, 5, 2, 4, 7, 8, 9, 4, 5, 10, 12, 43, 1, 0, 123]  
@@ -135,6 +154,11 @@ if __name__ == '__main__':
   quick_sort_arr = sort.arr
   sort.quick_sort(quick_sort_arr, 0, len(quick_sort_arr) - 1)
   print quick_sort_arr
+
+  print '归并排序: ',
+  merge_sort_arr = sort.arr
+  sort.merge_sort(merge_sort_arr, 0, len(merge_sort_arr) - 1)
+  print merge_sort_arr
 
   print '二分排序: ',
   sort.binary_sort()
