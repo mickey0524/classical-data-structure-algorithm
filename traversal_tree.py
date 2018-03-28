@@ -129,11 +129,45 @@ class TraversalTree(object):
           node = None
         else:
           node = node.right
-
-
-  def level_traversal(self, node):
+  
+  def recursive_level_traversal(self, node):
     """
-    层次遍历
+    递归层次遍历
+    type node: TreeNode 树的节点
+    """
+    
+    def recursive(node, cnt_level, target_level):
+      """
+      递归遍历节点
+      type node: TreeNode 树节点
+      type cnt_level: int 当前深度
+      type target_level: int 目标深度
+      """
+      if not node:
+        return
+      if cnt_level == target_level:
+        print node.val,
+        return
+      recursive(node.left, cnt_level + 1, target_level)
+      recursive(node.right, cnt_level + 1, target_level)
+
+    def get_tree_height(node):
+      """
+      获得树的高度
+      type node: TreeNode 树的节点
+      rtype: int
+      """
+      if not node:
+        return 0
+      return max(get_tree_height(node.left), get_tree_height(node.right)) + 1
+
+    for i in xrange(get_tree_height(node)):
+      recursive(node, 0, i)
+  
+
+  def non_recursive_level_traversal(self, node):
+    """
+    非递归层次遍历
     type node: TreeNode 树的节点
     """
     if not node:
@@ -172,5 +206,8 @@ if __name__ == '__main__':
   print '\n非递归后序遍历: ',
   tree.non_recursive_postorder(tree.root)
   
-  print '\n层次遍历: ',
-  tree.level_traversal(tree.root)
+  print '\n非递归层次遍历: ',
+  tree.non_recursive_level_traversal(tree.root)
+
+  print '\n递归层次遍历: ',
+  tree.recursive_level_traversal(tree.root)
