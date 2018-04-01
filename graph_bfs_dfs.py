@@ -43,9 +43,9 @@ class Graph(object):
       if not is_visited[i]:
         resursive(i)
       
-  def dfs(self):
+  def recursive_dfs(self):
     """
-    dfs遍历
+    递归dfs遍历
     """
     def resursive(begin):
       """
@@ -65,7 +65,40 @@ class Graph(object):
     for i in xrange(length):
       if not is_visited[i]:
         resursive(i)
+      
+  def non_recursive_dfs(self):
+    """
+    非递归dfs遍历
+    """
+    def resursive(begin):
+      """
+      遍历函数
+      :type begin: int 当前遍历的点
+      """
+      stack = deque()
+      stack.append(begin)
+      is_push = False
+      while len(stack) != 0:
+        is_push = False
+        cnt_p = stack[-1]
+        if not is_visited[cnt_p]:
+          print cnt_p,
+          is_visited[cnt_p] = True
+        for i in xrange(length):
+          if self.graph[cnt_p][i] == 1 and not is_visited[i]:
+            stack.append(i)
+            is_push = True
+            break
+        if not is_push:
+          stack.pop()
 
+    length = len(self.graph)
+    is_visited = [False] * length
+
+    for i in xrange(length):
+      if not is_visited[i]:
+        resursive(i)
+    
 
 if __name__ == '__main__':
   graphArr = [
@@ -79,7 +112,9 @@ if __name__ == '__main__':
 
   print 'bfs遍历: ',
   graph.bfs()
-  print '\ndfs遍历: ',
-  graph.dfs()
+  print '\n递归dfs遍历: ',
+  graph.recursive_dfs()
+  print '\n非递归dfs遍历: ',
+  graph.non_recursive_dfs()
     
   
