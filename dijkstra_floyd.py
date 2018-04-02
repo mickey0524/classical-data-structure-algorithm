@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author: mickey0524
-# Dijkstra求最短路径
+# Dijkstra, Floyd求最短路径
 # 2018-04-02
 
 # Dijkstra的核心思想是“松弛”，其实也有一些dp的思想，具体来说
@@ -32,6 +32,21 @@ def dijkstra(graph, p):
   return distance
 
 
+# Floyd的核心思想是依次允许遍历不同的节点
+def floyd(graph):
+  """
+  type graph: list[list] 代表图的矩阵
+  rtype: list[list]
+  """
+  length = len(graph)
+  for i in xrange(length):
+    for j in xrange(length):
+      for k in xrange(length):
+        if graph[j][i] + graph[i][k] < graph[j][k]:
+          graph[j][k] = graph[j][i] + graph[i][k]
+  
+  return graph
+
 if __name__ == '__main__':
   graph = [
     [0, 1, 12, float('inf'), float('inf'), float('inf')],
@@ -43,3 +58,5 @@ if __name__ == '__main__':
   ]
   distance = dijkstra(graph, 0)
   print distance
+
+  print floyd(graph)

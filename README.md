@@ -8,3 +8,4 @@ classical data structure algorithm implemented by python such as traverse treeï¼
   - [x] simple dp such as largest substring sum, longest common subsequence and so on
   - [x] Union-Find algorithm
   - [x] BFS and DFS
+  - [x] Dijkstra and Floyd
