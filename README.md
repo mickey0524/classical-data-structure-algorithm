@@ -11,3 +11,4 @@ classical data structure algorithm implemented by python such as traverse treeï¼
   - [x] Dijkstra and Floyd
   - [x] bracket_pair (application of Carterian formula)
   - [x] finding the nearest public ancestor of two tree nodes
+  - [x] implement of full permutation
