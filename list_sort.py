@@ -181,10 +181,34 @@ class ListSort(object):
     else:
       extra_arr += arr[r_head:r_tail + 1]
     return extra_arr
+  
+  def n_complexity_sort(self):
+    """
+    O(n)时间复杂度，O(n)空间复杂度的排序
+    rtype: list
+    """
+    arr = self.arr
+    max_num, min_num = max(arr), min(arr)
+    if min_num < 0:
+      max_num -= min_num
+
+    tmp = [0] * (max_num + 1)
+    for num in arr:
+      num = num if min_num >= 0 else num - min_num
+      tmp[num] += 1
+    res = []
+    if min_num > 0:
+      min_num = 0
+
+    for i in xrange(max_num + 1):
+      if tmp[i] > 0:
+        res.extend([i + min_num] * tmp[i])
     
+    return res
+
 
 if __name__ == '__main__':
-  arr = [1, 4, 5, 2, 4, 7, 8, 9, 4, 5, 10, 12, 43, 1, 0, 123]  
+  arr = [1, 4, 5, 2, 4, 7, 8, 9, 4, 5, 10, 12, 43, 1, 0, 123, -1, -5]  
   sort = ListSort(arr)
 
   print '普通插入排序: ',
@@ -213,6 +237,9 @@ if __name__ == '__main__':
   merge_sort_arr = sort.arr
   sort.merge_sort(merge_sort_arr, 0, len(merge_sort_arr) - 1)
   print merge_sort_arr
+
+  print 'O(n)时间复杂度排序：',
+  print sort.n_complexity_sort()
 
 
 
