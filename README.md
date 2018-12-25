@@ -13,4 +13,4 @@ classical data structure algorithm implemented by python such as traverse treeï¼
   - [x] finding the nearest public ancestor of two tree nodes
   - [x] implement of full permutation
   - [x] DAG
-  - [ ] prim algorithm (Minimum spanning tree)
+  - [x] prim algorithm (Minimum spanning tree)
