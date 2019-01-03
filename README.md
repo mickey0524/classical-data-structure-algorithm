@@ -14,5 +14,5 @@ classical data structure algorithm implemented by python such as traverse treeï¼
   - [x] implement of full permutation
   - [x] DAG
   - [x] prim algorithm (Minimum spanning tree)
-  - [ ] KMP
+  - [x] KMP
   - [x] N-Queen
