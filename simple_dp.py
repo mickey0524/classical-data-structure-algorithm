@@ -4,6 +4,7 @@
 # simple dp such as largest substring sum, longest common subsequence
 # 2018-03-30
 
+
 def largest_substring_sum(arr):
     """
     最长字段和
@@ -51,7 +52,7 @@ def longest_common_subsequence(a, b):
 
     print_str(a_len, b_len)
 
-    return (max([max(row) for row in flag]), ''.join(res))
+    return max([max(row) for row in flag]), ''.join(res)
 
 
 def longest_common_substring(a, b):
@@ -81,7 +82,27 @@ def longest_common_substring(a, b):
         max_i -= 1
         max_j -= 1
 
-    return (max_len, res)
+    return max_len, res
+
+
+def longest_increasing_subsequence(arr):
+    """
+    最长递增子序列
+    :param arr: 母序列
+    :return:
+    """
+    length = len(arr)
+    if length < 2:
+        return arr
+
+    dp = [1] * length
+
+    for i in xrange(1, length):
+        for j in xrange(0, i):
+            if arr[i] > arr[j] and dp[i] < dp[j] + 1:
+                dp[i] = dp[j] + 1
+
+    return max(dp)
 
 
 if __name__ == '__main__':
@@ -92,3 +113,6 @@ if __name__ == '__main__':
     print '最长公共子序列: {sequence}'.format(sequence=longest_common_subsequence(a, b))
 
     print '最长公共子串: {string}'.format(string=longest_common_substring(a, b))
+
+    arr = [3, 5, 7, 1, 2, 8]
+    print longest_increasing_subsequence(arr)
