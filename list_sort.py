@@ -184,7 +184,8 @@ class ListSort(object):
             extra_arr += arr[r_head:r_tail + 1]
         return extra_arr
 
-    def n_complexity_sort(self):
+
+    def cardinality_sort(self):
         """
         O(n)时间复杂度，O(n)空间复杂度的排序
         rtype: list
@@ -241,4 +242,4 @@ if __name__ == '__main__':
     print merge_sort_arr
 
     print 'O(n)时间复杂度排序：',
-    print sort.n_complexity_sort()
+    print sort.cardinality_sort()
