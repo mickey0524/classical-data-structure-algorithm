@@ -64,23 +64,17 @@ class ListSort(object):
             type tail: int 终止索引
             rtype: int
             """
-            # 预处理，选取合适的基准元素，减少复杂度
-            if arr[head] > arr[tail]:
-                arr[head], arr[tail] = arr[tail], arr[head]
-            middle = head + (tail - head) / 2
-            if head != middle and arr[head] > arr[middle]:
-                arr[head], arr[middle] = arr[middle], arr[head]
+            base_num = arr[tail]
+            i = head
 
-            base_num = arr[head]
-            while head < tail:
-                while tail > head and arr[tail] >= base_num:
-                    tail -= 1
-                arr[head], arr[tail] = arr[tail], arr[head]
-                while head < tail and arr[head] <= base_num:
-                    head += 1
-                arr[head], arr[tail] = arr[tail], arr[head]
-            arr[head] = base_num
-            return head
+            for j in xrange(head, tail):
+                if arr[j] < base_num:
+                    arr[i], arr[j] = arr[j], arr[i]
+                    i += 1
+
+            arr[tail], arr[i] = arr[i], arr[tail]
+
+            return i
 
         if head < tail:
             middle = partition(arr, head, tail)
