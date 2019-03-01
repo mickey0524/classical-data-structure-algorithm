@@ -21,7 +21,7 @@ class BinaryIndexedTree(object):
         self.nums = nums
 
     def update(self, i, n):
-        delta = self.nums[i] - n
+        delta = n - self.nums[i]
         self.nums[i] = n
 
         i += 1
