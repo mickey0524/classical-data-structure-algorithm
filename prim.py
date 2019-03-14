@@ -14,8 +14,8 @@ def prim(graph, init_node):
     """
     length = len(graph)
     flag = [0] * length
-    flag[init_node] = 1 # 1 代表处理过的节点
-    distance = [w for w in graph[init_node]] # deep copy
+    flag[init_node] = 1  # 1 代表处理过的节点
+    distance = [w for w in graph[init_node]]  # deep copy
     res = 0
 
     for _ in xrange(length - 1):

@@ -4,6 +4,7 @@
 # 并查集算法
 # 2017-03-31
 
+
 class UnionFind(object):
     def __init__(self, N):
         """
@@ -27,10 +28,10 @@ class UnionFind(object):
         type p: int 节点id
         rtype: int
         """
-        while p != self.id[p]:
-            self.id[p] = self.id[self.id[p]]
-            p = self.id[p]
-        return p
+        if p != self.id[p]:
+            self.id[p] = self._find(self.id[p])
+
+        return self.id[p]
 
     def union(self, p, q):
         """

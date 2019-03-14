@@ -7,7 +7,7 @@
 
 def largest_substring_sum(arr):
     """
-    最长字段和
+    最大字段和
     type arr: list 输入数组(字符串也一样)
     rtype: int
     """
@@ -18,6 +18,26 @@ def largest_substring_sum(arr):
         else:
             tmp += num
         res = max(res, tmp)
+
+    return res
+
+
+def maximum_product_subarray(arr):
+    """
+    最大子段积
+    :param arr: list 输入数组(字符串也一样)
+    :return: int
+    """
+    res = cur_max = cur_min = arr[0]
+
+    for n in arr[1:]:
+        if n < 0:
+            cur_max, cur_min = cur_min, cur_max
+
+        cur_min = min(cur_min * n, n)
+        cur_max = max(cur_max * n, n)
+
+        res = max(cur_max, res)
 
     return res
 
@@ -108,6 +128,7 @@ def longest_increasing_subsequence(arr):
 if __name__ == '__main__':
     arr = [6, -3, -3, 1, -9, 7, 7, 6, -7, 5, 5, -1, 10, 0, -7, 9, 1, 1, -7, -8]
     print '最大子串和: {num}'.format(num=largest_substring_sum(arr))
+    print '最大子串积: {num}'.format(num=maximum_product_subarray(arr))
 
     a, b = 'abcbdab', 'bdcaba'
     print '最长公共子序列: {sequence}'.format(sequence=longest_common_subsequence(a, b))

@@ -4,10 +4,11 @@
 # Dijkstra, Floyd求最短路径
 # 2018-04-02
 
-# Dijkstra的核心思想是“松弛”，其实也有一些dp的思想，具体来说
-# 就是根据当前点的最短路径去更新之前的最短路径
+
 def dijkstra(graph, p):
     """
+    Dijkstra的核心思想是“松弛”，其实也有一些dp的思想，具体来说
+    就是根据当前点的最短路径去更新之前的最短路径
     type graph: list[list] 代表图的矩阵
     type p: int 基准点
     rtype: list
@@ -32,9 +33,9 @@ def dijkstra(graph, p):
     return distance
 
 
-# Floyd的核心思想是依次允许遍历不同的节点
 def floyd(graph):
     """
+    Floyd的核心思想是依次允许遍历不同的节点
     type graph: list[list] 代表图的矩阵
     rtype: list[list]
     """

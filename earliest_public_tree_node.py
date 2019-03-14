@@ -4,6 +4,7 @@
 # 获取树两个节点的最早公共节点
 # 2018-04-09
 
+
 class TreeNode(object):
     def __init__(self, val):
         self.val = val
@@ -32,7 +33,7 @@ def get_earliest_public_tree_node(node, left, right):
     right_val = get_earliest_public_tree_node(node.right, left, right)
     cnt_node_val = 1 if node == left or node == right else 0
 
-    if left_val + right_val + cnt_node_val == 2:
+    if parent is None and left_val + right_val + cnt_node_val == 2:
         parent = node
 
     return left_val + right_val + cnt_node_val
