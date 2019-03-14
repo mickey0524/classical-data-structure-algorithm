@@ -42,7 +42,7 @@ class UnionFind(object):
         p_root, q_root = self._find(p), self._find(q)
 
         if p_root == q_root:
-            return
+            return False
 
         if self.size[p_root] < self.size[q_root]:
             self.id[p_root] = q_root
@@ -52,6 +52,8 @@ class UnionFind(object):
             self.size[p_root] += self.size[q_root]
 
         self.count -= 1
+
+        return True
 
 
 if __name__ == '__main__':

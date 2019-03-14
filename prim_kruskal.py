@@ -5,6 +5,9 @@
 # 2018-12-25
 
 
+from union_find import UnionFind
+
+
 def prim(graph, init_node):
     """
     prim 算法
@@ -39,6 +42,33 @@ def prim(graph, init_node):
     return res
 
 
+def kruskal(graph):
+    """
+    kruskal 算法
+    :param graph: 图
+    """
+    length = len(graph)
+    uf = UnionFind(length)
+
+    edges = []
+
+    for i in xrange(length):
+        for j in xrange(i + 1, length):
+            if graph[i][j] < float('inf'):
+                edges.append((graph[i][j], i, j))
+
+    edges.sort()
+
+    res = 0
+
+    for e in edges:
+        m, n = e[1], e[2]
+        if uf.union(m, n):
+            res += e[0]
+
+    return res
+
+
 if __name__ == "__main__":
     graph = [
         [float('inf'), 6, 1, 5, float('inf'), float('inf')],
@@ -51,3 +81,5 @@ if __name__ == "__main__":
 
     for i in xrange(len(graph)):
         print prim(graph, i)
+
+    print kruskal(graph)
