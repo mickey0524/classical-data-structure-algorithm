@@ -123,20 +123,30 @@ class ListSort(object):
         堆排序
         rtype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
 
-        for i in xrange(length - 1):
-            tail = length - 1 - i
-            for j in xrange(tail - 1 / 2, -1, -1):
-                left, right = 2 * j + 1, 2 * j + 2
-                if left <= tail and arr[left] > arr[j]:
-                    arr[left], arr[j] = arr[j], arr[left]
-                if right <= tail and arr[right] > arr[j]:
-                    arr[right], arr[j] = arr[j], arr[right]
-            arr[tail], arr[0] = arr[0], arr[tail]
+        def down(i, j):
+            while i < j:
+                a, b = 2 * i + 1, 2 * i + 2
+                if a >= j:
+                    break
+                max_idx = a
+                if b < j and arr[b] > arr[a]:
+                    max_idx = b
+                if arr[i] < arr[max_idx]:
+                    arr[i], arr[max_idx] = arr[max_idx], arr[i]
+                    i = max_idx
+                else:
+                    break
 
-        print arr
+        for i in xrange(length / 2, -1, -1):
+            down(i, length)
+
+        for i in xrange(length - 1, 0, -1):
+            arr[i], arr[0] = arr[0], arr[i]
+            down(0, i)
+
         return arr
 
     def api_heap_sort(self):
@@ -177,7 +187,6 @@ class ListSort(object):
         else:
             extra_arr += arr[r_head:r_tail + 1]
         return extra_arr
-
 
     def cardinality_sort(self):
         """
@@ -226,7 +235,7 @@ if __name__ == '__main__':
     sort.api_binary_sort()
 
     print '堆排序: ',
-    sort.heap_sort()
+    print sort.heap_sort()
 
     print 'api堆排序: {arr}'.format(arr=sort.api_heap_sort())
 
