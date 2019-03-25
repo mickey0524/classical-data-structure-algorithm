@@ -118,34 +118,65 @@ class ListSort(object):
         print res
         return res
 
-    def heap_sort(self):
+    def heap_sort_v1(self):
         """
-        堆排序
+        堆排序 - down 建堆版本
         rtype: list
         """
         arr = self.arr[:]
         length = len(arr)
 
-        def down(i, j):
-            while i < j:
-                a, b = 2 * i + 1, 2 * i + 2
-                if a >= j:
-                    break
-                max_idx = a
-                if b < j and arr[b] > arr[a]:
-                    max_idx = b
-                if arr[i] < arr[max_idx]:
-                    arr[i], arr[max_idx] = arr[max_idx], arr[i]
-                    i = max_idx
-                else:
-                    break
-
         for i in xrange(length / 2, -1, -1):
-            down(i, length)
+            self.heap_down(arr, i, length)
 
         for i in xrange(length - 1, 0, -1):
             arr[i], arr[0] = arr[0], arr[i]
-            down(0, i)
+            self.heap_down(arr, 0, i)
+
+        return arr
+
+    @staticmethod
+    def heap_down(arr, i, j):
+        while i < j:
+            a, b = 2 * i + 1, 2 * i + 2
+            if a >= j:
+                break
+            max_idx = a
+            if b < j and arr[b] > arr[a]:
+                max_idx = b
+            if arr[i] < arr[max_idx]:
+                arr[i], arr[max_idx] = arr[max_idx], arr[i]
+                i = max_idx
+            else:
+                break
+
+    @staticmethod
+    def heap_up(arr, i):
+        while i > 0:
+            parent_id = (i - 1) / 2
+            if parent_id < 0:
+                break
+            if arr[i] > arr[parent_id]:
+                arr[i], arr[parent_id] = arr[parent_id], arr[i]
+                i = parent_id
+            else:
+                break
+
+    def heap_sort_v2(self):
+        """
+        堆排序 - up 建堆版本
+        :return:
+        """
+        length = len(self.arr)
+        arr = []
+
+        for i in xrange(length):
+            arr += self.arr[i],
+            self.heap_up(arr, i)
+
+        for i in xrange(length - 1, 0, -1):
+            arr[i], arr[0] = arr[0], arr[i]
+            self.heap_down(arr, 0, i)
 
         return arr
 
@@ -235,7 +266,8 @@ if __name__ == '__main__':
     sort.api_binary_sort()
 
     print '堆排序: ',
-    print sort.heap_sort()
+    print sort.heap_sort_v1()
+    print sort.heap_sort_v2()
 
     print 'api堆排序: {arr}'.format(arr=sort.api_heap_sort())
 
