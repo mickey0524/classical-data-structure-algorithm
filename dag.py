@@ -11,7 +11,7 @@ def is_dag_dfs(graph):
     rtype: bool 是否为DAG
     """
     length = len(graph)
-    
+
     is_visited = [[False] * length, None]
     begin_with = [[False] * length]
 
@@ -20,7 +20,7 @@ def is_dag_dfs(graph):
             return
         if is_visited[0][idx] == True:
             is_visited[1] = False
-            return 
+            return
         is_visited[0][idx] = True
         begin_with[0][idx] = True
         for i in xrange(len(graph[idx])):
@@ -59,7 +59,7 @@ def is_dag_topo(graph):
 
         if not zero_indegree_node:
             return False
-    
+
     return True
 
 

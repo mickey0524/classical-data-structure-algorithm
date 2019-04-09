@@ -30,26 +30,30 @@ def full_permutation(arr):
 
 def full_permutation_v1(arr):
     length = len(arr)
+
+    if length == 0:
+        return []
+
     if length == 1:
         return [arr]
 
     res = []
 
     for i in xrange(length):
-        arr[i], arr[0] = arr[0], arr[i]
+        arr[0], arr[i] = arr[i], arr[0]
         tmp = full_permutation_v1(arr[1:])
-        for t in tmp:
-            t.insert(0, arr[0])
-        res.extend(tmp)
+        for l in tmp:
+            res.append([arr[0]] + l)
+        arr[i], arr[0] = arr[0], arr[i]
 
     return res
 
 
 if __name__ == '__main__':
-    a = [11, 18, 14, 20, 25]
-    r0 = full_permutation(a)
-    r0 = map(tuple, r0)
-    r1 = full_permutation_v1(a)
-    r1 = map(tuple, r1)
-    s0, s1 = set(r0), set(r1)
-    print s0 - s1
+    # a = [11, 18, 14, 20, 123]
+    # print len(full_permutation(a))
+    # print len(full_permutation_v1(a))
+    a = [1, 2, 3]
+    print full_permutation(a)
+    print full_permutation_v1(a)
+

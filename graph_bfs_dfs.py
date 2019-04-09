@@ -82,7 +82,6 @@ class Graph(object):
             """
             stack = deque()
             stack.append(begin)
-            is_push = False
             while len(stack) != 0:
                 is_push = False
                 cnt_p = stack[-1]

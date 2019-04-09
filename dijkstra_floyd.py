@@ -3,6 +3,8 @@
 # author: mickey0524
 # Dijkstra, Floyd求最短路径
 # 2018-04-02
+# Dijkstra的核心思想是“松弛”，其实也有一些dp的思想，具体来说
+# 就是根据当前点的最短路径去更新之前的最短路径
 
 
 def dijkstra(graph, p):

@@ -19,6 +19,7 @@ def kmp(a, b):
         return True
 
     next = gen_next(b)
+    print next
     i, j = 0, 0
 
     while i < len_a and j < len_b:
