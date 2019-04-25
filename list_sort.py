@@ -17,24 +17,42 @@ class ListSort(object):
         普通插入排序
         rtype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
         for i in xrange(1, length):
-            j = 0
-            while j < i:
-                if arr[i] < arr[j]:
+            for j in xrange(i - 1, -1, -1):
+                if arr[j + 1] < arr[j]:
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                else:
                     break
-                j += 1
-            if j != i:
-                tmp = arr[i]
-                for index in xrange(i, j, -1):
-                    arr[index] = arr[index - 1]
-                arr[j] = tmp
+
         print arr
         return arr
 
+    def shell_sort(self):
+        """
+        希尔排序
+        :return:
+        """
+        arr = self.arr[:]
+        length = len(arr)
+        h = 1
+        while h < length / 3:
+            h = 3 * h + 1
+
+        while h >= 1:
+            for i in xrange(h, length):
+                for j in xrange(i, h - 1, -h):
+                    if arr[j] < arr[j - h]:
+                        arr[j], arr[j - h] = arr[j - h], arr[j]
+                    else:
+                        break
+
+            h /= 3
+        print arr
+
     def select_sort(self):
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
 
         for i in xrange(length - 1):
@@ -52,7 +70,7 @@ class ListSort(object):
         冒泡排序
         rype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
         for i in xrange(0, length - 1):
             for j in xrange(i + 1, length):
@@ -100,7 +118,7 @@ class ListSort(object):
         二分排序
         rtype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
         for i in xrange(1, length):
             head, tail = 0, i - 1
@@ -122,7 +140,7 @@ class ListSort(object):
         用python提供的api实现二分排序
         rtype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
         res = []
 
@@ -199,7 +217,7 @@ class ListSort(object):
         用python提供的api实现堆排序
         rtype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         length = len(arr)
         heap = []
 
@@ -245,7 +263,7 @@ class ListSort(object):
         O(n)时间复杂度，O(n)空间复杂度的排序
         rtype: list
         """
-        arr = self.arr
+        arr = self.arr[:]
         max_num, min_num = max(arr), min(arr)
         if min_num < 0:
             max_num -= min_num
@@ -272,6 +290,9 @@ if __name__ == '__main__':
     print '普通插入排序: ',
     sort.insert_sort()
 
+    print '希尔排序: ',
+    sort.shell_sort()
+
     print '选择排序: ',
     sort.select_sort()
 
@@ -279,7 +300,7 @@ if __name__ == '__main__':
     sort.bubble_sort()
 
     print '快速排序: ',
-    quick_sort_arr = sort.arr
+    quick_sort_arr = sort.arr[:]
     sort.quick_sort(quick_sort_arr, 0, len(quick_sort_arr) - 1)
     print quick_sort_arr
 
@@ -296,8 +317,7 @@ if __name__ == '__main__':
     print 'api堆排序: {arr}'.format(arr=sort.api_heap_sort())
 
     print '归并排序: ',
-    merge_sort_arr = sort.arr
-    sort.merge_sort(merge_sort_arr)
+    merge_sort_arr = sort.merge_sort(sort.arr[:])
     print merge_sort_arr
 
     print 'O(n)时间复杂度排序：',
