@@ -125,6 +125,33 @@ def longest_increasing_subsequence(arr):
     return max(dp)
 
 
+def longest_increasing_subsequence_logn(arr):
+    """
+    nlogn 复杂度的最长递增子序列
+    """
+    length = len(arr)
+    if length == 0:
+        return 0
+    
+    stack = [float('-inf')]
+    idx = 0
+
+    for n in arr:
+        if n > stack[-1]:
+            idx += 1
+            stack += n,
+
+        l, r, m = 1, idx, -1
+        while l <= r:
+            m = l + (r - l) / 2
+            if n > stack[m]:
+                l = m + 1
+            else:
+                r = m - 1
+        stack[l] = n
+    
+    return idx
+
 if __name__ == '__main__':
     arr = [6, -3, -3, 1, -9, 7, 7, 6, -7, 5, 5, -1, 10, 0, -7, 9, 1, 1, -7, -8]
     print '最大子串和: {num}'.format(num=largest_substring_sum(arr))
@@ -137,3 +164,4 @@ if __name__ == '__main__':
 
     arr = [3, 5, 7, 1, 2, 8]
     print longest_increasing_subsequence(arr)
+    print longest_increasing_subsequence_logn(arr)
