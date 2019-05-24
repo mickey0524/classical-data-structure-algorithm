@@ -128,6 +128,10 @@ def longest_increasing_subsequence(arr):
 def longest_increasing_subsequence_logn(arr):
     """
     nlogn 复杂度的最长递增子序列
+    利用二分搜索，寻找 n 应该插入的位置，这样替换掉比 n 大的最小的元素
+    提高后续元素插入的潜力，比如说当前最大的是 13
+    n 为 12，那么 12 就会替换掉 13 的位置
+    下一个 13 到来的时候，就会被写入队列，这样，子序列的长度就提高了
     """
     length = len(arr)
     if length == 0:
