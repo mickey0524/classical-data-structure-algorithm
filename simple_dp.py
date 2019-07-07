@@ -144,6 +144,7 @@ def longest_increasing_subsequence_logn(arr):
         if n > stack[-1]:
             idx += 1
             stack += n,
+            continue
 
         l, r, m = 1, idx, -1
         while l <= r:

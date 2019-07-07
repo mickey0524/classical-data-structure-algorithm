@@ -29,6 +29,26 @@ class ListSort(object):
         print arr
         return arr
 
+    def insert_sort_v1(self):
+        """
+        插入排序
+        :return:
+        """
+        arr = self.arr[:]
+        length = len(arr)
+
+        for i in xrange(1, length):
+            for j in xrange(i):
+                if arr[j] > arr[i]:
+                    tmp = arr[i]
+                    for k in xrange(i, j, -1):
+                        arr[k] = arr[k - 1]
+                    arr[j] = tmp
+                    break
+
+        print arr
+        return arr
+
     def shell_sort(self):
         """
         希尔排序
@@ -76,6 +96,22 @@ class ListSort(object):
             for j in xrange(i + 1, length):
                 if arr[j] < arr[i]:
                     arr[i], arr[j] = arr[j], arr[i]
+        print arr
+        return arr
+
+    def bubble_sort_v1(self):
+        """
+        冒泡排序
+        :return:
+        """
+        arr = self.arr[:]
+        length = len(arr)
+
+        for i in xrange(length - 1):
+            for j in xrange(0, length - 1 - i):
+                if arr[j + 1] < arr[j]:
+                    arr[j + 1], arr[j] = arr[j], arr[j + 1]
+
         print arr
         return arr
 
@@ -290,6 +326,9 @@ if __name__ == '__main__':
     print '普通插入排序: ',
     sort.insert_sort()
 
+    print '插入排序: ',
+    sort.insert_sort_v1()
+
     print '希尔排序: ',
     sort.shell_sort()
 
@@ -298,6 +337,9 @@ if __name__ == '__main__':
 
     print '冒泡排序: ',
     sort.bubble_sort()
+
+    print '冒泡排序：',
+    sort.bubble_sort_v1()
 
     print '快速排序: ',
     quick_sort_arr = sort.arr[:]

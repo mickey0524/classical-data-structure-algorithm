@@ -63,6 +63,36 @@ def is_dag_topo(graph):
     return True
 
 
+def is_dag_topo_v1(graph):
+    """
+    判断是否为 DAG
+    :param graph: 图
+    :return:
+    """
+    length = len(graph)
+    in_degree_arr = [0] * length
+
+    for i in xrange(length):
+        for j in xrange(length):
+            if graph[i][j] == 1:
+                in_degree_arr[j] += 1
+
+    for _ in xrange(length - 1):
+        is_zero_in_degree_node_exist = False
+        for i in xrange(length):
+            if in_degree_arr[i] == 0:
+                for j in xrange(length):
+                    if graph[i][j] == 1:
+                        in_degree_arr[j] -= 1
+                is_zero_in_degree_node_exist = True
+                in_degree_arr[i] = -1
+                break
+        if not is_zero_in_degree_node_exist:
+            return False
+
+    return True
+
+
 if __name__ == '__main__':
     graph1 = [
         [0, 1, 1, 0, 0, 0],
@@ -84,6 +114,12 @@ if __name__ == '__main__':
         print '无环'
     else:
         print '有环'
+    topo_v1_res = is_dag_topo_v1(graph1)
+    print 'graph1-topo-v1得到的结果为:',
+    if topo_v1_res:
+        print '无环'
+    else:
+        print '有环'
     graph2 = [
         [0, 1, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
@@ -101,6 +137,12 @@ if __name__ == '__main__':
     topo_res = is_dag_topo(graph2)
     print 'graph2-topo得到的结果为:',
     if topo_res:
+        print '无环'
+    else:
+        print '有环'
+    topo_v1_res = is_dag_topo_v1(graph2)
+    print 'graph2-topo-v1得到的结果为:',
+    if topo_v1_res:
         print '无环'
     else:
         print '有环'
